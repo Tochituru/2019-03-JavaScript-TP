@@ -1,3 +1,10 @@
+// Ro, te deje a lo largo del codigo algunas observaciones a tu TP. 
+// Son detalles, como mejorar los nombres de algunas variables o eliminar los comentarios, 
+//     que te serviran al momento de hacer un challenge para alguna empresa. 
+// En general tu codigo esta muy bien, y se nota el esfuerzo y la comprension de los conceptos. 
+// Felicitaciones!
+
+
 //Objetos originales
 console.log('OBJETOS ORIGINALES');
 
@@ -92,6 +99,32 @@ function vendedoraDelMes(mes, anio) {
     }
     return arrayVendedoras[posicion].nombre
 }
+
+// Una manera aun mas breve (y mas abstracta) es esta:
+// function vendedoraDelMes(mes, anio) {
+//   var ventasVendedoras = {};
+
+//   for (var i = 0; i < local.ventas.length; i++) {
+//     if (local.ventas[i].fecha.getMonth() + 1 === mes && local.ventas[i].fecha.getFullYear() === anio) {
+//       var vendedora = ventas[i].nombreVendedora;
+//       if (!ventasVendedoras[vendedora]) {
+//         ventasVendedoras[vendedora] = 0;
+//       }
+
+//       ventasVendedoras[vendedora] += precioMaquina( local.ventas[i].componentes );
+//     }
+//   }
+
+//   var max = vendedoras[0];
+
+//   for (var i = 0; i < vendedoras.length; i++) {
+//     if (max && ventasVendedoras[vendedoras[i]] > ventasVendedoras[max]) {
+//       max = vendedoras[i];
+//     }
+//   }
+
+//   return max;
+// }
 console.log(vendedoraDelMes(1, 2019));
 // 'Ada' (vendio por $670, una máquina de $320 y otra de $350)
 
@@ -105,10 +138,19 @@ function ventasMes(mes, anio) {
     var ventasMes = 0;
     for (let i = 0; i < local.ventas.length; i++) {
         //Necesitas que una variable con I cambie, por eso dentro del for
+        
+        // esto es un detalle, pero si fuera por ej un challenge para una empresa
+        // seria importante borrar todos los comentarios y console.log
+        
         var mesVenta = local.ventas[i].fecha.getMonth() + 1;
         var anioVentas = local.ventas[i].fecha.getFullYear();
         if (mes == mesVenta && anio == anioVentas) {
+            // a menos que queramos comparar strings con numeros, 
+            // es buena practica acostumbrarse a usar el triple signo ===
+            // nos da mayor control sobre los datos
             ventasMes = ventasMes + precioMaquina(local.ventas[i].componentes)
+            // o mas brevemente, podriamos decir:
+//             ventasMes+= precioMaquina(local.ventas[i].componentes)
         }
     }
     return ventasMes
@@ -124,7 +166,7 @@ console.log('1.E: Obtener las ventas totales de una vendedora')
 
 function ventasVendedora(vendedoraIngresada) {
     var ventasTotalesVendedoras = [];
-    local.vendedoras.forEach(function (vendedora) {
+    local.vendedoras.forEach(function (vendedora) { // buen uso de forEach!
         var ventasTotales = {
             nombre: '',
             ventas: 0,
@@ -163,6 +205,9 @@ function componenteMasVendido(componente) {
     }
     var componenteConMasVentas = 0;
     var letraFinal = 0;
+    // en general vamos a preferir nombres de variables descriptivos
+    // para que quien lea nuestro codigo sepa a que nos referimos
+    // es un detalle, pero suma mucha legibilidad a tu codigo
 
     for (let j = 0; j < arrayComponente.length; j++) {
         if (componenteConMasVentas < arrayComponente[j].cantidadDeVentas) {
@@ -191,6 +236,10 @@ function huboVentas(mes, anio) {
     }
     return ventasSi
 }
+
+// si inicializamos "ventasSi" en false, nos ahorramos el codigo del "Else". 
+
+
 console.log(huboVentas(3, 2019)); // false
 
 //CONSIGNA 2
@@ -252,6 +301,18 @@ console.log(ventasSucursal('Centro')); // 4195
 console.log('2.E: ¿cómo podemos reutilizar código y podamos repetir?')
 console.log('//IDK :/ No comparten tanto en común, pero imagino que habrá una forma de usar placeholders (?)')
 
+// // Podemos hacer una funcion que trabaje indistintamente con el nombre de la vendedora o de la sucursal, asi:
+// function ventas(nombre) {
+//     var total = 0;
+//     for (var i = 0; i < local.ventas.length; i++) {
+//         if (local.ventas[i].sucursal === nombre || local.ventas[i].nombreVendedora === nombre) {
+//             total += precioMaquina(local.ventas[i].componentes);
+//         }
+//     }
+//     return total;
+// }
+
+
 //Consigna 2.F: Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
 console.log('2.F: Qué sucursal vendió más en plata en determinado mes')
 
@@ -280,6 +341,9 @@ function sucursalDelMes(mes, anio) {
     }
     return 'La sucursal ' + arrayVentasMes[ubicacion].sucursal + ' es la que más vendió: ' + arrayVentasMes[ubicacion].ventas
 }
+
+// Bien. Se puede modificar, para abreviarla, de la misma manera que vendedoraDelMes
+
 console.log(sucursalDelMes(1, 2019)); // 'Centro'
 
 //CONSIGNA 3
